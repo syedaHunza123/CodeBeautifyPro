@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeBeautify Pro - Advanced Code Formatter & Beautifier</title>
+    <meta name="description" content="Professional code formatting and beautification service. Format JavaScript, Python, HTML, CSS, JSON and more with our advanced SaaS platform.">
+    <meta name="keywords" content="code formatter, code beautifier, javascript formatter, python formatter, html formatter, css formatter, json formatter">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .code-editor {
+            font-family: 'Courier New', monospace;
+            background: #1e1e1e;
+            color: #d4d4d4;
+        }
+        .syntax-highlight .keyword { color: #569cd6; }
+        .syntax-highlight .string { color: #ce9178; }
+        .syntax-highlight .comment { color: #6a9955; }
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+        .feature-icon {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <h1 class="text-2xl font-bold gradient-bg bg-clip-text text-blue">CodeBeautify Pro</h1>
+                    </div>
+                    <div class="hidden md:ml-6 md:flex md:space-x-8">
+                        <a href="#home" class="nav-link text-gray-900 hover:text-purple-600 px-3 py-2 text-sm font-medium">Home</a>
+                        <a href="#features" class="nav-link text-gray-500 hover:text-purple-600 px-3 py-2 text-sm font-medium">Features</a>
+                        <a href="#pricing" class="nav-link text-gray-500 hover:text-purple-600 px-3 py-2 text-sm font-medium">Pricing</a>
+                        <a href="#blog" class="nav-link text-gray-500 hover:text-purple-600 px-3 py-2 text-sm font-medium">Blog</a>
+                        <a href="#contact" class="nav-link text-gray-500 hover:text-purple-600 px-3 py-2 text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div id="auth-buttons" class="hidden md:flex space-x-3">
+                        <button onclick="showLogin()" class="text-gray-500 hover:text-purple-600 px-3 py-2 text-sm font-medium">Login</button>
+                        <button onclick="showSignup()" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-medium">Sign Up</button>
+                    </div>
+                    <div id="user-menu" class="hidden">
+                        <button onclick="showDashboard()" class="text-gray-500 hover:text-purple-600 px-3 py-2 text-sm font-medium">Dashboard</button>
+                        <button onclick="logout()" class="text-gray-500 hover:text-purple-600 px-3 py-2 text-sm font-medium">Logout</button>
+                    </div>
+                    <button class="md:hidden">
+                        <i class="fas fa-bars text-gray-500"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div id="main-content">
+        <!-- Hero Section -->
+        <section id="home" class="pt-20 pb-16 gradient-bg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+                        Format Your Code Like a Pro
+                    </h1>
+                    <p class="text-xl text-gray-200 mb-8 max-w-3xl mx-auto">
+                        Transform messy code into clean, readable masterpieces. Support for 50+ programming languages with advanced formatting options.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button onclick="showSignup()" class="bg-white text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+                            Start Free Trial
+                        </button>
+                        <button class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-purple-600 transition">
+                            View Demo
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Code Demo -->
+                <div class="mt-16 max-w-4xl mx-auto">
+                    <div class="bg-white rounded-lg shadow-2xl overflow-hidden">
+                        <div class="grid md:grid-cols-2 gap-0">
+                            <div class="p-6">
+                                <h3 class="text-lg font-semibold mb-4 text-gray-800">Before (Messy Code)</h3>
+                                <div class="code-editor p-4 rounded syntax-highlight text-sm">
+                                    <div class="text-gray-400"># Unformatted Python code</div>
+                                    <div><span class="keyword">def</span> <span class="string">calculate</span>(x,y):</div>
+                                    <div>if x>0 and y>0:return x*y</div>
+                                    <div><span class="keyword">else</span>:return 0</div>
+                                </div>
+                            </div>
+                            <div class="p-6 bg-gray-50">
+                                <h3 class="text-lg font-semibold mb-4 text-gray-800">After (Beautified)</h3>
+                                <div class="code-editor p-4 rounded syntax-highlight text-sm">
+                                    <div class="comment"># Formatted Python code</div>
+                                    <div><span class="keyword">def</span> calculate(x, y):</div>
+                                    <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> x > 0 <span class="keyword">and</span> y > 0:</div>
+                                    <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> x * y</div>
+                                    <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span>:</div>
+                                    <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> 0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Powerful Features</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">Everything you need to format, beautify, and optimize your code</p>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center p-8 rounded-lg hover:shadow-lg transition">
+                        <div class="feature-icon text-5xl mb-4">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">50+ Languages</h3>
+                        <p class="text-gray-600">Support for JavaScript, Python, Java, C++, HTML, CSS, JSON, XML, and many more programming languages.</p>
+                    </div>
+                    
+                    <div class="text-center p-8 rounded-lg hover:shadow-lg transition">
+                        <div class="feature-icon text-5xl mb-4">
+                            <i class="fas fa-magic"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">Smart Formatting</h3>
+                        <p class="text-gray-600">AI-powered formatting that understands context and applies best practices automatically.</p>
+                    </div>
+                    
+                    <div class="text-center p-8 rounded-lg hover:shadow-lg transition">
+                        <div class="feature-icon text-5xl mb-4">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">Custom Rules</h3>
+                        <p class="text-gray-600">Define your own formatting rules and coding standards for consistent code across your team.</p>
+                    </div>
+                    
+                    <div class="text-center p-8 rounded-lg hover:shadow-lg transition">
+                        <div class="feature-icon text-5xl mb-4">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">Lightning Fast</h3>
+                        <p class="text-gray-600">Format large files in seconds with our optimized processing engine.</p>
+                    </div>
+                    
+                    <div class="text-center p-8 rounded-lg hover:shadow-lg transition">
+                        <div class="feature-icon text-5xl mb-4">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">Secure & Private</h3>
+                        <p class="text-gray-600">Your code is processed securely and never stored on our servers.</p>
+                    </div>
+                    
+                    <div class="text-center p-8 rounded-lg hover:shadow-lg transition">
+                        <div class="feature-icon text-5xl mb-4">
+                            <i class="fas fa-plug"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">API Integration</h3>
+                        <p class="text-gray-600">Integrate with your existing workflow using our powerful REST API.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Simple, Transparent Pricing</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">Choose the plan that fits your needs</p>
+                    
+                    <div class="mt-8 flex justify-center">
+                        <div class="bg-white p-1 rounded-lg">
+                            <button id="monthly-btn" onclick="togglePricing('monthly')" class="px-6 py-2 rounded bg-purple-600 text-white font-medium">Monthly</button>
+                            <button id="yearly-btn" onclick="togglePricing('yearly')" class="px-6 py-2 rounded text-gray-600 font-medium">Yearly</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Free Plan -->
+                    <div class="pricing-card bg-white rounded-lg shadow-lg p-8 transition duration-300">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Free</h3>
+                        <div class="text-4xl font-bold text-gray-900 mb-2">$0</div>
+                        <div class="text-gray-600 mb-6">Perfect for getting started</div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>5 formats per day</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>Basic languages support</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>Standard formatting</li>
+                            <li class="flex items-center"><i class="fas fa-times text-gray-400 mr-3"></i>Custom rules</li>
+                            <li class="flex items-center"><i class="fas fa-times text-gray-400 mr-3"></i>API access</li>
+                        </ul>
+                        <button onclick="showSignup()" class="w-full bg-gray-200 text-gray-800 py-3 rounded-lg font-semibold hover:bg-gray-300 transition">
+                            Get Started
+                        </button>
+                    </div>
+                    
+                    <!-- Pro Plan -->
+                    <div class="pricing-card bg-white rounded-lg shadow-xl p-8 border-2 border-purple-600 relative transition duration-300">
+                        <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                            <span class="bg-purple-600 text-white px-4 py-1 rounded-full text-sm font-medium">Most Popular</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Pro</h3>
+                        <div class="text-4xl font-bold text-gray-900 mb-2">
+                            <span id="pro-monthly" class="pricing-amount">$19</span>
+                            <span id="pro-yearly" class="pricing-amount hidden">$15</span>
+                        </div>
+                        <div class="text-gray-600 mb-6">For professional developers</div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>Unlimited formats</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>All languages support</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>Advanced formatting</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>Custom rules</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>Priority support</li>
+                        </ul>
+                        <button onclick="selectPlan('pro')" class="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition">
+                            Start Free Trial
+                        </button>
+                    </div>
+                    
+                    <!-- Enterprise Plan -->
+                    <div class="pricing-card bg-white rounded-lg shadow-lg p-8 transition duration-300">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Enterprise</h3>
+                        <div class="text-4xl font-bold text-gray-900 mb-2">
+                            <span id="enterprise-monthly" class="pricing-amount">$99</span>
+                            <span id="enterprise-yearly" class="pricing-amount hidden">$79</span>
+                        </div>
+                        <div class="text-gray-600 mb-6">For teams and organizations</div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>Everything in Pro</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>API access</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>Team management</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>Advanced analytics</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i>24/7 support</li>
+                        </ul>
+                        <button onclick="selectPlan('enterprise')" class="w-full bg-gray-800 text-white py-3 rounded-lg font-semibold hover:bg-gray-900 transition">
+                            Contact Sales
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4">What Our Users Say</h2>
+                    <p class="text-xl text-gray-600">Trusted by developers worldwide</p>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-gray-50 p-8 rounded-lg">
+                        <div class="text-yellow-400 text-2xl mb-4">★★★★★</div>
+                        <p class="text-gray-700 mb-6">"CodeBeautify Pro has transformed our development workflow. The formatting is consistent and saves us hours every week."</p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center text-white font-semibold mr-4">JS</div>
+                            <div>
+                                <div class="font-semibold">John Smith</div>
+                                <div class="text-gray-600">Senior Developer at TechCorp</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-8 rounded-lg">
+                        <div class="text-yellow-400 text-2xl mb-4">★★★★★</div>
+                        <p class="text-gray-700 mb-6">"The API integration is seamless. We've automated our entire code formatting process with CodeBeautify Pro."</p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center text-white font-semibold mr-4">MJ</div>
+                            <div>
+                                <div class="font-semibold">Maria Johnson</div>
+                                <div class="text-gray-600">CTO at StartupXYZ</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-8 rounded-lg">
+                        <div class="text-yellow-400 text-2xl mb-4">★★★★★</div>
+                        <p class="text-gray-700 mb-6">"Best code formatter I've used. The custom rules feature lets us maintain our coding standards effortlessly."</p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center text-white font-semibold mr-4">DL</div>
+                            <div>
+                                <div class="font-semibold">David Lee</div>
+                                <div class="text-gray-600">Lead Engineer at DevStudio</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="py-20 bg-gray-50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+                    <p class="text-xl text-gray-600">Everything you need to know about CodeBeautify Pro</p>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="faq-item bg-white rounded-lg shadow-sm">
+                        <button class="w-full text-left p-6 focus:outline-none" onclick="toggleFAQ(0)">
+                            <div class="flex justify-between items-center">
+                                <h3 class="text-lg font-semibold text-gray-900">What programming languages do you support?</h3>
+                                <i class="fas fa-chevron-down faq-chevron transition-transform"></i>
+                            </div>
+                        </button>
+                        <div class="faq-content hidden p-6 pt-0">
+                            <p class="text-gray-600">We support over 50 programming languages including JavaScript, Python, Java, C++, C#, PHP, Ruby, Go, Rust, TypeScript, HTML, CSS, JSON, XML, SQL, and many more.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item bg-white rounded-lg shadow-sm">
+                        <button class="w-full text-left p-6 focus:outline-none" onclick="toggleFAQ(1)">
+                            <div class="flex justify-between items-center">
+                                <h3 class="text-lg font-semibold text-gray-900">Is my code secure and private?</h3>
+                                <i class="fas fa-chevron-down faq-chevron transition-transform"></i>
+                            </div>
+                        </button>
+                        <div class="faq-content hidden p-6 pt-0">
+                            <p class="text-gray-600">Absolutely. Your code is processed in real-time and never stored on our servers. We use enterprise-grade encryption and security measures to protect your data.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item bg-white rounded-lg shadow-sm">
+                        <button class="w-full text-left p-6 focus:outline-none" onclick="toggleFAQ(2)">
+                            <div class="flex justify-between items-center">
+                                <h3 class="text-lg font-semibold text-gray-900">Can I integrate CodeBeautify Pro with my IDE?</h3>
+                                <i class="fas fa-chevron-down faq-chevron transition-transform"></i>
+                            </div>
+                        </button>
+                        <div class="faq-content hidden p-6 pt-0">
+                            <p class="text-gray-600">Yes! We offer plugins for popular IDEs like VS Code, IntelliJ IDEA, and Sublime Text. You can also use our API to build custom integrations.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item bg-white rounded-lg shadow-sm">
+                        <button class="w-full text-left p-6 focus:outline-none" onclick="toggleFAQ(3)">
+                            <div class="flex justify-between items-center">
+                                <h3 class="text-lg font-semibold text-gray-900">What's included in the free trial?</h3>
+                                <i class="fas fa-chevron-down faq-chevron transition-transform"></i>
+                            </div>
+                        </button>
+                        <div class="faq-content hidden p-6 pt-0">
+                            <p class="text-gray-600">The free trial includes full access to all Pro features for 14 days, including unlimited formatting, custom rules, and priority support. No credit card required.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Latest from Our Blog</h2>
+                    <p class="text-xl text-gray-600">Tips, tutorials, and insights for better code formatting</p>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <article class="bg-gray-50 rounded-lg overflow-hidden hover:shadow-lg transition">
+                        <div class="h-48 bg-gradient-to-r from-purple-400 to-pink-400"></div>
+                        <div class="p-6">
+                            <div class="text-sm text-gray-500 mb-2">December 15, 2023</div>
+                            <h3 class="text-xl font-semibold mb-3">10 JavaScript Formatting Best Practices</h3>
+                            <p class="text-gray-600 mb-4">Learn the essential formatting rules that will make your JavaScript code more readable and maintainable.</p>
+                            <a href="#" class="text-purple-600 hover:text-purple-700 font-medium">Read More →</a>
+                        </div>
+                    </article>
+                    
+                    <article class="bg-gray-50 rounded-lg overflow-hidden hover:shadow-lg transition">
+                        <div class="h-48 bg-gradient-to-r from-blue-400 to-purple-400"></div>
+                        <div class="p-6">
+                            <div class="text-sm text-gray-500 mb-2">December 12, 2023</div>
+                            <h3 class="text-xl font-semibold mb-3">Python Code Style Guide</h3>
+                            <p class="text-gray-600 mb-4">Master Python formatting with PEP 8 guidelines and advanced formatting techniques.</p>
+                            <a href="#" class="text-purple-600 hover:text-purple-700 font-medium">Read More →</a>
+                        </div>
+                    </article>
+                    
+                    <article class="bg-gray-50 rounded-lg overflow-hidden hover:shadow-lg transition">
+                        <div class="h-48 bg-gradient-to-r from-green-400 to-blue-400"></div>
+                        <div class="p-6">
+                            <div class="text-sm text-gray-500 mb-2">December 10, 2023</div>
+                            <h3 class="text-xl font-semibold mb-3">Automating Code Formatting in CI/CD</h3>
+                            <p class="text-gray-600 mb-4">Integrate automated code formatting into your continuous integration pipeline for consistent code quality.</p>
+                            <a href="#" class="text-purple-600 hover:text-purple-700 font-medium">Read More →</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 bg-gray-50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Get in Touch</h2>
+                    <p class="text-xl text-gray-600">Have questions? We'd love to hear from you.</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-6">Contact Information</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-envelope text-purple-600 text-xl mr-4"></i>
+                                <span>support@codebeautifypro.com</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-phone text-purple-600 text-xl mr-4"></i>
+                                <span>+1 (555) 123-4567</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt text-purple-600 text-xl mr-4"></i>
+                                <span>123 Code Street, Developer City, DC 12345</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h4 class="text-lg font-semibold mb-4">Follow Us</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="text-gray-400 hover:text-purple-600"><i class="fab fa-twitter text-2xl"></i></a>
+                                <a href="#" class="text-gray-400 hover:text-purple-600"><i class="fab fa-github text-2xl"></i></a>
+                                <a href="#" class="text-gray-400 hover:text-purple-600"><i class="fab fa-linkedin text-2xl"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <form id="contact-form" class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                                <input type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                                <textarea rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" required></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Dashboard (Hidden by default) -->
+    <div id="dashboard" class="hidden pt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-900">Dashboard</h1>
+                <p class="text-gray-600">Welcome back! Here's your formatting activity.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-purple-100 rounded-lg">
+                            <i class="fas fa-code text-purple-600"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-2xl font-semibold">1,234</p>
+                            <p class="text-gray-600">Files Formatted</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-green-100 rounded-lg">
+                            <i class="fas fa-clock text-green-600"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-2xl font-semibold">45h</p>
+                            <p class="text-gray-600">Time Saved</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-blue-100 rounded-lg">
+                            <i class="fas fa-chart-line text-blue-600"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-2xl font-semibold">98%</p>
+                            <p class="text-gray-600">Success Rate</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-yellow-100 rounded-lg">
+                            <i class="fas fa-star text-yellow-600"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-2xl font-semibold">Pro</p>
+                            <p class="text-gray-600">Current Plan</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold mb-4">Usage Statistics</h3>
+                    <canvas id="usageChart" style="height: 300px;"></canvas>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold mb-4">Recent Activity</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between py-2">
+                            <div>
+                                <p class="font-medium">main.js</p>
+                                <p class="text-sm text-gray-600">JavaScript • 2 minutes ago</p>
+                            </div>
+                            <span class="text-green-600"><i class="fas fa-check"></i></span>
+                        </div>
+                        <div class="flex items-center justify-between py-2">
+                            <div>
+                                <p class="font-medium">styles.css</p>
+                                <p class="text-sm text-gray-600">CSS • 15 minutes ago</p>
+                            </div>
+                            <span class="text-green-600"><i class="fas fa-check"></i></span>
+                        </div>
+                        <div class="flex items-center justify-between py-2">
+                            <div>
+                                <p class="font-medium">app.py</p>
+                                <p class="text-sm text-gray-600">Python • 1 hour ago</p>
+                            </div>
+                            <span class="text-green-600"><i class="fas fa-check"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">CodeBeautify Pro</h3>
+                    <p class="text-gray-400 mb-4">The ultimate code formatting solution for professional developers.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-github"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Product</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">Features</a></li>
+                        <li><a href="#" class="hover:text-white">Pricing</a></li>
+                        <li><a href="#" class="hover:text-white">API</a></li>
+                        <li><a href="#" class="hover:text-white">Integrations</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">Documentation</a></li>
+                        <li><a href="#" class="hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white">Contact</a></li>
+                        <li><a href="#" class="hover:text-white">Status</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">About</a></li>
+                        <li><a href="#" class="hover:text-white">Blog</a></li>
+                        <li><a href="#" class="hover:text-white">Careers</a></li>
+                        <li><a href="#" class="hover:text-white">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 CodeBeautify Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-md w-full p-8">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold">Login</h2>
+                <button onclick="hideModals()" class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <form id="loginForm">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                    <input type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" required>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                    <input type="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" required>
+                </div>
+                <button type="submit" class="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition">
+                    Login
+                </button>
+            </form>
+            
+            <p class="text-center mt-4 text-gray-600">
+                Don't have an account? <button onclick="showSignup()" class="text-purple-600 hover:text-purple-700">Sign up</button>
+            </p>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-md w-full p-8">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold">Sign Up</h2>
+                <button onclick="hideModals()" class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <form id="signupForm">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                    <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                    <input type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" required>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                    <input type="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" required>
+                </div>
+                <button type="submit" class="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition">
+                    Sign Up
+                </button>
+            </form>
+            
+            <p class="text-center mt-4 text-gray-600">
+                Already have an account? <button onclick="showLogin()" class="text-purple-600 hover:text-purple-700">Login</button>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Global state
+        let isLoggedIn = false;
+        let currentUser = null;
+        let pricingMode = 'monthly';
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // Initialize chart if dashboard is visible
+            if (!document.getElementById('dashboard').classList.contains('hidden')) {
+                initializeChart();
+            }
+
+            // Contact form submission
+            document.getElementById('contact-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for your message! We\'ll get back to you soon.');
+                this.reset();
+            });
+
+            // Login form submission
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                login();
+            });
+
+            // Signup form submission
+            document.getElementById('signupForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                signup();
+            });
+        });
+
+        // Authentication functions
+        function showLogin() {
+            hideModals();
+            document.getElementById('loginModal').classList.remove('hidden');
+        }
+
+        function showSignup() {
+            hideModals();
+            document.getElementById('signupModal').classList.remove('hidden');
+        }
+
+        function hideModals() {
+            document.getElementById('loginModal').classList.add('hidden');
+            document.getElementById('signupModal').classList.add('hidden');
+        }
+
+        function login() {
+            // Simulate login process
+            isLoggedIn = true;
+            currentUser = { name: 'John Doe', email: 'john@example.com', plan: 'Pro' };
+            
+            // Update UI
+            document.getElementById('auth-buttons').classList.add('hidden');
+            document.getElementById('user-menu').classList.remove('hidden');
+            
+            hideModals();
+            alert('Login successful! Welcome back.');
+        }
+
+        function signup() {
+            // Simulate signup process
+            isLoggedIn = true;
+            currentUser = { name: 'New User', email: 'user@example.com', plan: 'Free' };
+            
+            // Update UI
+            document.getElementById('auth-buttons').classList.add('hidden');
+            document.getElementById('user-menu').classList.remove('hidden');
+            
+            hideModals();
+            alert('Account created successfully! Welcome to CodeBeautify Pro.');
+        }
+
+        function logout() {
+            isLoggedIn = false;
+            currentUser = null;
+            
+            // Update UI
+            document.getElementById('auth-buttons').classList.remove('hidden');
+            document.getElementById('user-menu').classList.add('hidden');
+            
+            // Show main content if dashboard is visible
+            if (!document.getElementById('dashboard').classList.contains('hidden')) {
+                showMainContent();
+            }
+            
+            alert('You have been logged out successfully.');
+        }
+
+        function showDashboard() {
+            if (!isLoggedIn) {
+                showLogin();
+                return;
+            }
+            
+            document.getElementById('main-content').classList.add('hidden');
+            document.getElementById('dashboard').classList.remove('hidden');
+            
+            // Initialize chart
+            setTimeout(() => {
+                initializeChart();
+            }, 100);
+        }
+
+        function showMainContent() {
+            document.getElementById('main-content').classList.remove('hidden');
+            document.getElementById('dashboard').classList.add('hidden');
+        }
+
+        // Pricing functions
+        function togglePricing(mode) {
+            pricingMode = mode;
+            
+            // Update button styles
+            const monthlyBtn = document.getElementById('monthly-btn');
+            const yearlyBtn = document.getElementById('yearly-btn');
+            
+            if (mode === 'monthly') {
+                monthlyBtn.classList.add('bg-purple-600', 'text-white');
+                monthlyBtn.classList.remove('text-gray-600');
+                yearlyBtn.classList.remove('bg-purple-600', 'text-white');
+                yearlyBtn.classList.add('text-gray-600');
+            } else {
+                yearlyBtn.classList.add('bg-purple-600', 'text-white');
+                yearlyBtn.classList.remove('text-gray-600');
+                monthlyBtn.classList.remove('bg-purple-600', 'text-white');
+                monthlyBtn.classList.add('text-gray-600');
+            }
+            
+            // Update prices
+            document.querySelectorAll('.pricing-amount').forEach(element => {
+                element.classList.add('hidden');
+            });
+            
+            document.querySelectorAll(`#pro-${mode}, #enterprise-${mode}`).forEach(element => {
+                element.classList.remove('hidden');
+            });
+        }
+
+        function selectPlan(plan) {
+            if (!isLoggedIn) {
+                showSignup();
+                return;
+            }
+            
+            // Simulate plan selection
+            alert(`You've selected the ${plan.charAt(0).toUpperCase() + plan.slice(1)} plan! Redirecting to payment...`);
+        }
+
+        // FAQ functions
+        function toggleFAQ(index) {
+            const faqItems = document.querySelectorAll('.faq-item');
+            const faqContent = faqItems[index].querySelector('.faq-content');
+            const chevron = faqItems[index].querySelector('.faq-chevron');
+            
+            if (faqContent.classList.contains('hidden')) {
+                faqContent.classList.remove('hidden');
+                chevron.style.transform = 'rotate(180deg)';
+            } else {
+                faqContent.classList.add('hidden');
+                chevron.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Chart initialization
+        function initializeChart() {
+            const canvas = document.getElementById('usageChart');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Files Formatted',
+                        data: [65, 59, 80, 81, 56, 85],
+                        borderColor: '#8B5CF6',
+                        backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // Navigation highlighting
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('text-gray-900');
+                link.classList.add('text-gray-500');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('text-gray-900');
+                    link.classList.remove('text-gray-500');
+                }
+            });
+        });
+
+        // Close modals when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('fixed') && e.target.classList.contains('inset-0')) {
+                hideModals();
+            }
+        });
+    </script>
+</body>
+</html>
